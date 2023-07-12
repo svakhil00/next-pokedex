@@ -1,14 +1,10 @@
 import Link from 'next/link'
-import Image from 'next/image';
+import Image from 'next/image'
+import { getPokemon } from '../helpers'
 export default async function Pokemon({ params }) {
-    console.log(params);
-
     const pokemon = await getPokemon(params.pokemon)
 
-    const prev = await getPokemon(pokemon.id - 1)
-    const next = await getPokemon(pokemon.id + 1)
-    console.log(prev)
-    console.log(next)
+    const [prev, next] = await Promise.all([getPokemon(pokemon.id - 1), getPokemon(pokemon.id + 1)])
     const types = pokemon.types.map((typesJSON) => {
         return (
             typesJSON.type.name
@@ -30,10 +26,4 @@ export default async function Pokemon({ params }) {
             <Link href={`/${next.name}`}>Next</Link>
         </div>
     )
-}
-
-async function getPokemon(name) {
-    const fetchedRequest = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
-    const pokemonJSON = await fetchedRequest.json()
-    return pokemonJSON
 }
