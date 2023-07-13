@@ -1,46 +1,28 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { DynamoDBClient, GetItemCommand } from "@aws-sdk/client-dynamodb";
 import { getPokemon } from './helpers'
-import PokemonDatabase from './pokemonDatabase'
-import NumberedPokemonDatabase from './numberedPokemonDatabase'
+import { getPicture } from './helpers'
+import card from '@/components/Card'
 
 export default async function Home() {
-  const keys = Object.keys(NumberedPokemonDatabase)
-  const AWS = require('aws-sdk');
-  AWS.config.region = 'us-east-2';
-  const dynamoDB = new AWS.DynamoDB();
-  const params = {
-    TableName: 'pokemon',
-    Key: {
-      "id": {
-        N: "1"
-      }
-    }
-  };
 
-  dynamoDB.getItem(params, (err, data) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(data);
-    }
+  const pokemonList = new Array();
+  for (let i = 1; i < 3; i++) {
+    pokemonList[i] = (await getPokemon(i));
+  }
+
+
+  const pokemon = pokemonList.map((info) => {
+    return (
+      // <div key={info.Item.id}>
+      //   <Image src={getPicture(info)} width={250} height={250} alt="Image Not Found"></Image>
+      //   <Link href={`/${info.Item.id.N}`}>{info.Item.id.N}</Link>
+      // </div>
+      card(info)
+    )
   });
 
-  const pokemon = keys.map((pName) => {
-    return (
-      <div key={pName}>
-        <p>
-          <Image
-            src={`/p${pName}.png`}
-            width={250}
-            height={250}
-            alt="Pikachu"
-          /></p>
-        <p><Link href={`/${NumberedPokemonDatabase[pName]}`}>{NumberedPokemonDatabase[pName]}</Link></p>
-      </div>
-    )
-  }
-  )
   return (
     <div>
       <h1>Pokedex</h1>

@@ -1,29 +1,33 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { getPokemon } from '../helpers'
+import { getPicture } from '../helpers'
 export default async function Pokemon({ params }) {
     const pokemon = await getPokemon(params.pokemon)
-
-    const [prev, next] = await Promise.all([getPokemon(pokemon.id - 1), getPokemon(pokemon.id + 1)])
-    const types = pokemon.types.map((typesJSON) => {
-        return (
-            typesJSON.type.name
-        )
-    }
-    )
+    const currid = parseInt(pokemon.Item.id.N)
+    console.log(currid)
+    const previd = currid == 1 ? 1010 : currid - 1;
+    const nextid = currid == 1010 ? 1 : currid + 1;
+    const [prev, next] = await Promise.all([getPokemon(previd), getPokemon(nextid)]);
+    console.log(prev.Item.varieties.L);
+    // const types = pokemon.Item.varieties.L[0].types.map((info) => {
+    //     console.log(info)
+    //     return (
+    //         "test"
+    //     )
+    // }
+    // )
 
 
     return (
         <div>
             <Link href="/">Home</Link>
-            <Image src={pokemon.sprites.other["official-artwork"].front_default} width={250} height={250} alt={params.pokemon} />
-            <h1>Name: {pokemon.name}</h1>
-            <h1>Number: {pokemon.id}</h1>
-            {/* <h2>Category: {p.Category}</h2> */}
-            <h2>Type: {types.join(", ")}</h2>
-            {/* <h2>Weakness: {pokemonJSON.types.join(", ")}</h2> */}
-            <Link href={`/${prev.name}`}>Previous</Link>
-            <Link href={`/${next.name}`}>Next</Link>
+            <Image src={getPicture(pokemon)} width={250} height={250} alt={params.pokemon} />
+            <h1>Name: {pokemon.Item.name.S}</h1>
+            <h1>Number: {pokemon.Item.id.N}</h1>
+            {/* <h2>Type: {types.join(", ")}</h2> */}
+            <Link href={`/${prev.Item.id.N}`}>Previous</Link>
+            <Link href={`/${next.Item.id.N}`}>Next</Link>
         </div>
     )
 }
