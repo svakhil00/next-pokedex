@@ -1,4 +1,6 @@
 import { DynamoDBClient, GetItemCommand } from "@aws-sdk/client-dynamodb";
+import card from "@/components/Card";
+
 export async function getPokemon(id) {
     const params = {
         TableName: 'pokemon',

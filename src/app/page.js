@@ -1,3 +1,4 @@
+""
 import Link from 'next/link'
 import Image from 'next/image'
 import { DynamoDBClient, GetItemCommand } from "@aws-sdk/client-dynamodb";
@@ -8,25 +9,24 @@ import card from '@/components/Card'
 export default async function Home() {
 
   const pokemonList = new Array();
-  for (let i = 1; i < 3; i++) {
+  for (let i = 1; i < 10; i++) {
     pokemonList[i] = (await getPokemon(i));
   }
 
 
   const pokemon = pokemonList.map((info) => {
+    const nameNumber = info.Item.name.S.charAt(0).toUpperCase() + info.Item.name.S.slice(1) + "#" + info.Item.id.N.padStart(4, '0')
     return (
-      // <div key={info.Item.id}>
-      //   <Image src={getPicture(info)} width={250} height={250} alt="Image Not Found"></Image>
-      //   <Link href={`/${info.Item.id.N}`}>{info.Item.id.N}</Link>
-      // </div>
-      card(info)
+      <a href={`/${info.Item.id.N}`} key={info.Item.id.N}>
+        <td >{card(info, nameNumber)}</td>
+      </a>
     )
   });
 
   return (
     <div>
       <h1>Pokedex</h1>
-      {pokemon}
+      <table>{pokemon}</table>
     </div>
   )
 }
