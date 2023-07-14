@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { getPokemon } from './helpers';
 import { getPicture } from './helpers';
 import { Label } from '@/components/ui/label';
-import { ScrollArea } from '../../@/components/ui/scroll-area';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import {
   Table,
   TableCell,
