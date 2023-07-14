@@ -11,6 +11,11 @@
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.369.0",
     "@aws-sdk/client-s3": "^3.369.0",
+    "@radix-ui/react-label": "^2.0.2",
+    "@radix-ui/react-scroll-area": "^1.0.4",
+    "@radix-ui/react-separator": "^1.0.3",
+    "@radix-ui/react-slot": "^1.0.2",
+    "@tanstack/react-table": "^8.9.3",
     "aws-sdk": "^2.1414.0",
     "class-variance-authority": "^0.6.1",
     "clsx": "^1.2.1",
@@ -27,6 +32,8 @@
     "tailwindcss-animate": "^1.0.6"
   },
   "devDependencies": {
+    "@types/node": "20.4.2",
+    "@types/react": "18.2.15",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.25",
     "tailwindcss": "^3.3.2"
