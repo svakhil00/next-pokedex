@@ -1,23 +1,22 @@
 import Image from 'next/image';
-import { getPokemon } from './helpers';
-import { getPicture } from './helpers';
-import { Label } from '@/components/ui/label';
-import { ScrollArea } from '@/components/ui/scroll-area';
+import { getColor, getPokemon, getPicture } from './helpers';
+import { Label } from '../components/ui/label';
+import { ScrollArea } from '../components/ui/scroll-area';
 import {
   Table,
   TableCell,
-} from "@/components/ui/table"
+} from "../components/ui/table"
 import {
   Card,
   CardContent,
-} from "@/components/ui/card"
+} from "../components/ui/card"
 
 
 
 export default async function Home() {
 
   const pokemonList = []
-  for (let i = 1; i < 26; i++) {
+  for (let i = 1; i < 10; i++) {
     pokemonList[i] = (await getPokemon(i));
   }
 
@@ -50,8 +49,11 @@ export default async function Home() {
 }
 
 function makeCard(info, name, number) {
+  const type = info.Item.varieties.L[0].M.types.L[0].S
+  const color = getColor(type)//
+  console.log(typeof color)
   return (
-    <Card className="w-[250px] bg-slate-200">
+    <Card className={`w-[250px] bg-${color}-200 border-${color}-950`}>
       <CardContent>
         <div className="grid w-full items-center gap-4">
           <div>

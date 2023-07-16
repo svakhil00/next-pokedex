@@ -12,7 +12,6 @@ export default async function Pokemon({ params }) {
     const previd = currid == 1 ? 1010 : currid - 1;
     const nextid = currid == 1010 ? 1 : currid + 1;
     const [prev, next] = await Promise.all([getPokemon(previd), getPokemon(nextid)]);
-    const typesList = pokemon.Item.varieties.L[0].M.types.L
     const types = pokemon.Item.varieties.L[0].M.types.L.map((info) => {
         return (
             info.S
@@ -33,7 +32,7 @@ export default async function Pokemon({ params }) {
     return (
         <div>
             <Link href="/">Home</Link>
-            <p>{card(pokemon, text)}</p>
+            {card(pokemon, text)}
         </div>
     )
 }
