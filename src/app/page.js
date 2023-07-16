@@ -50,7 +50,7 @@ export default async function Home() {
 
 function makeCard(info, name, number) {
   const type = info.Item.varieties.L[0].M.types.L[0].S
-  const color = getColor(type)//
+  const color = "slate"//getColor(type)
   console.log(typeof color)
   return (
     <Card className={`w-[250px] bg-${color}-200 border-${color}-950`}>
