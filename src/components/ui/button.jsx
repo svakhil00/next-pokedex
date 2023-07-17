@@ -1,7 +1,7 @@
+"use client"
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva } from "class-variance-authority";
-
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
@@ -35,9 +35,15 @@ const buttonVariants = cva(
 
 const Button = React.forwardRef(({ className, variant, size, asChild = false, ...props }, ref) => {
   const Comp = asChild ? Slot : "button"
+  const [age, setAge] = React.useState(25);
+  const handleClick = () => {
+    setAge(30);
+    console.log(age)
+  }
   return (
     (<Comp
       className={cn(buttonVariants({ variant, size, className }))}
+      onClick={handleClick}
       ref={ref}
       {...props} />)
   );

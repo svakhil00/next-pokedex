@@ -5,6 +5,7 @@ import { getPicture } from '../helpers'
 import card from '@/components/Card'
 
 
+
 export default async function Pokemon({ params }) {
     const pokemon = await getPokemon(params.pokemon)
     const currid = parseInt(pokemon.Item.id.N)
