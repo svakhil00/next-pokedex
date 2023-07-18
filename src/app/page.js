@@ -19,18 +19,16 @@ import { Button } from '../components/ui/button';
 
 
 export default async function Home() {
-  //const poke = getAllPokemon()
-  //console.log(poke)
+  const pokemonList = (await getAllPokemon()).Items
+  console.log()
 
-  const pokemonList = []
-  for (let i = 1; i < 51; i++) {
-    pokemonList[i] = (await getPokemon(i));
-  }
+
+
 
   const pokemon = pokemonList.map((info) => {
     return (
-      < div class="pokemon" className="border-spacing-10" key={info.Item.name.S} id={info.Item.name.S} >
-        <a href={`/${info.Item.id.N}`}>
+      < div class="pokemon" className="border-spacing-10" key={info.name.S} id={info.name.S} >
+        <a href={`/${info.id.N}`}>
           {makeCard(info)}
         </a>
       </div >

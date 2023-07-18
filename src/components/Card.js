@@ -7,7 +7,7 @@ const card = (info, text) => {
         <div className="relative w-96 m-3 cursor-pointer border-2 shadow-lg rounded-xl items-center">
             {/* Image */}
             <div className="flex bg-gray-700 rounded-xl items-center justify-center">
-                <Image src={getPicture(info)} width={250} height={250} alt="Image Not Found"></Image>
+                <Image src={getPicture(info.Item)} width={250} height={250} alt="Image Not Found"></Image>
             </div>
 
             {/* Info */}

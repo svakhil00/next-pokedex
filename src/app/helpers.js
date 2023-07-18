@@ -1,18 +1,18 @@
-import { DynamoDBClient, GetItemCommand, QueryCommand } from "@aws-sdk/client-dynamodb";
+import { DynamoDBClient, GetItemCommand, QueryCommand, ScanCommand } from "@aws-sdk/client-dynamodb";
 import { Card } from "../components/ui/card";
 import { CardContent } from "../components/ui/card";
 import Image from "next/image";
 import { Label } from "../components/ui/label";
+import { Info } from "lucide-react";
 
 export async function getAllPokemon() {
     const client = new DynamoDBClient({ region: 'us-east-2' });
     const input = { // QueryInput
         TableName: "pokemon", // required
-        Limit: Number("int"),
-        ConsistentRead: true || false,
+        Limit: 1010,//Number("int"),
     };
 
-    const command = new QueryCommand(input);
+    const command = new ScanCommand(input);
     try {
         const results = await client.send(command);
         return results;
@@ -42,9 +42,9 @@ export async function getPokemon(id) {
 }
 
 export function makeCard(info) {
-    const type = info.Item.varieties.L[0].M.types.L[0].S
-    const name = info.Item.name.S.charAt(0).toUpperCase() + info.Item.name.S.slice(1)
-    const number = "#" + info.Item.id.N.padStart(4, '0')
+    const type = info.varieties.L[0].M.types.L[0].S
+    const name = info.name.S.charAt(0).toUpperCase() + info.name.S.slice(1)
+    const number = "#" + info.id.N.padStart(4, '0')
     const color = getColor(type)
     //set slate to $(color)
     return (
@@ -64,7 +64,7 @@ export function makeCard(info) {
 }
 
 export function getPicture(info) {
-    return info.Item.varieties.L[0].M.img.S
+    return info.varieties.L[0].M.img.S
 }
 
 export function getColor(type) {

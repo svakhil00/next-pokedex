@@ -1,10 +1,6 @@
 "use client"
 import * as React from "react"
-
 import { cn } from "@/lib/utils"
-import { getPokemon } from "@/app/helpers";
-import { poke } from "@/app/helpers";
-import { makeCard } from "@/app/helpers";
 
 
 const Input = React.forwardRef(({ className, type, ...props }, ref) => {
@@ -12,7 +8,7 @@ const Input = React.forwardRef(({ className, type, ...props }, ref) => {
   const handleInput = () => {
     const value = document.getElementById("searchbar").value
     const allPokemon = document.getElementsByClassName("pokemon");
-    var pokemon = document.querySelectorAll('[id*="' + value + '"]');
+    var pokemon = document.querySelectorAll('div[id*="' + value + '"]');
     var displayVal = "none"
     if (value === "") {
       displayVal = ""
