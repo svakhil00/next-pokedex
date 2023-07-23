@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { getColor, getPokemon, getPicture, getAllPokemon } from './helpers';
+import { getColor, getPokemon, getPicture, getAllPokemon, testQuery } from './helpers';
 import { Label } from '../components/ui/label';
 import { ScrollArea } from '../components/ui/scroll-area';
 import { Input } from '../components/ui/input';
@@ -15,16 +15,10 @@ import {
 import { Button } from '../components/ui/button';
 
 
-
-
-
 export default async function Home() {
   const pokemonList = (await getAllPokemon()).Items
-  console.log()
-
-
-
-
+  //const test = (await testQuery());
+  //console.log(test)
   const pokemon = pokemonList.map((info) => {
     return (
       < div class="pokemon" className="border-spacing-10" key={info.name.S} id={info.name.S} >
@@ -34,8 +28,6 @@ export default async function Home() {
       </div >
     )
   });
-
-
 
 
   return (
@@ -60,7 +52,3 @@ export default async function Home() {
     </div>
   )
 }
-
-
-
-

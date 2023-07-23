@@ -1,15 +1,36 @@
-import { DynamoDBClient, GetItemCommand, QueryCommand, ScanCommand } from "@aws-sdk/client-dynamodb";
+import { DynamoDBClient, GetItemCommand, QueryCommand, ScanCommand, QueryCommandInput } from "@aws-sdk/client-dynamodb";
+import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 import { Card } from "../components/ui/card";
 import { CardContent } from "../components/ui/card";
 import Image from "next/image";
 import { Label } from "../components/ui/label";
 import { Info } from "lucide-react";
 
+export async function testQuery() {
+    const client = new DynamoDBClient({ region: 'us-east-2' });
+    const input = {
+        TableName: "pokemon",
+        Limit: 1,
+        KeyConditionExpression: "id between \:id1 and \:id2",
+        ExpressionAttributeValues: marshall({
+            "\:id1": "1",
+            "\:id2": "10"
+        })
+    }
+    const command = new QueryCommand(input);
+    try {
+        const response = await client.send(command);
+        return response;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 export async function getAllPokemon() {
     const client = new DynamoDBClient({ region: 'us-east-2' });
     const input = { // QueryInput
         TableName: "pokemon", // required
-        Limit: 1010,//Number("int"),
+        Limit: Number("int"),
     };
 
     const command = new ScanCommand(input);
@@ -22,6 +43,7 @@ export async function getAllPokemon() {
 }
 
 export async function getPokemon(id) {
+
     const params = {
         TableName: 'pokemon',
         Key: {
@@ -63,8 +85,8 @@ export function makeCard(info) {
     )
 }
 
-export function getPicture(info) {
-    return info.varieties.L[0].M.img.S
+export function getPicture(info, index = 0) {
+    return info.varieties.L[index].M.img.S
 }
 
 export function getColor(type) {

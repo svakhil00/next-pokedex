@@ -9,10 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@aws-sdk/client-dynamodb": "^3.369.0",
+    "@aws-sdk/client-dynamodb": "^3.370.0",
     "@aws-sdk/client-s3": "^3.369.0",
+    "@aws-sdk/util-dynamodb": "^3.370.0",
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-scroll-area": "^1.0.4",
+    "@radix-ui/react-select": "^1.2.2",
     "@radix-ui/react-separator": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
     "@tanstack/react-table": "^8.9.3",

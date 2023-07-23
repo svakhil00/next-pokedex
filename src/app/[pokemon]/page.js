@@ -2,38 +2,41 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { getPokemon } from '../helpers'
 import { getPicture } from '../helpers'
-import card from '@/components/Card'
+import { Badge } from '../../components/ui/badge'
+import Info, { info } from '../../components/ui/pokemon'
+
 
 
 
 export default async function Pokemon({ params }) {
-    const pokemon = await getPokemon(params.pokemon)
-    const currid = parseInt(pokemon.Item.id.N)
-    console.log(currid)
+    const pokemon = (await getPokemon(params.pokemon)).Item
+    const currid = parseInt(pokemon.id.N)
     const previd = currid == 1 ? 1010 : currid - 1;
     const nextid = currid == 1010 ? 1 : currid + 1;
     const [prev, next] = await Promise.all([getPokemon(previd), getPokemon(nextid)]);
-    const types = pokemon.Item.varieties.L[0].M.types.L.map((info) => {
-        return (
-            info.S
-        )
-    });
-    const text = (
-        <div>
-            <h1>Name: {pokemon.Item.name.S}</h1>
-            <h1>Number: {pokemon.Item.id.N}</h1>
-            <h1>Category: {pokemon.Item.genus.S}</h1>
-            <h2>Types: {types.join(", ")}</h2>
-            <Link href={`/${prev.Item.id.N}`}>Previous</Link>
-            <Link href={`/${next.Item.id.N}`}>Next</Link>
-        </div>
-    )
+
+
+
+
+
+
+
+
+
+    console.log(prev)
+
+
+
+
 
 
     return (
-        <div>
-            <Link href="/">Home</Link>
-            {card(pokemon, text)}
+        <div className="bg-slate-950 h-screen w-screen">
+            <Info info={pokemon} prev={prev} next={next} />
         </div>
+        // <div>
+        //     <Link href="/">Home</Link>
+        //     {card(pokemon, text)}
+        // </div>
     )
 }
