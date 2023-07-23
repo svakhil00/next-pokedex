@@ -4,9 +4,10 @@ import { cn } from "@/lib/utils"
 
 
 const Input = React.forwardRef(({ className, type, ...props }, ref) => {
-  const [text, setText] = React.useState();
-  const handleInput = () => {
-    const value = document.getElementById("searchbar").value
+  const handleInput = (test) => {
+    console.log(test)
+    const value = document.getElementById("searchbar").value.toLowerCase()
+    console.log(typeof value)
     const allPokemon = document.getElementsByClassName("pokemon");
     var pokemon = document.querySelectorAll('div[id*="' + value + '"]');
     var displayVal = "none"
@@ -19,7 +20,6 @@ const Input = React.forwardRef(({ className, type, ...props }, ref) => {
     for (let i = 0; i < pokemon.length; i++) {
       pokemon.item(i).style.display = ""
     }
-    setText(value)
   }
   return (
     (<input
