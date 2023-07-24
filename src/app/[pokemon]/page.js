@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { getPokemon } from '../helpers'
+import { getPokemon, searchByName } from '../helpers'
 import { getPicture } from '../helpers'
 import { Badge } from '../../components/ui/badge'
 import Info, { info } from '../../components/ui/pokemon'
@@ -15,28 +15,9 @@ export default async function Pokemon({ params }) {
     const nextid = currid == 1010 ? 1 : currid + 1;
     const [prev, next] = await Promise.all([getPokemon(previd), getPokemon(nextid)]);
 
-
-
-
-
-
-
-
-
-    console.log(prev)
-
-
-
-
-
-
     return (
         <div className="bg-slate-950 h-screen w-screen">
             <Info info={pokemon} prev={prev} next={next} />
         </div>
-        // <div>
-        //     <Link href="/">Home</Link>
-        //     {card(pokemon, text)}
-        // </div>
     )
 }

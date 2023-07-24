@@ -36,14 +36,24 @@ const Info = (props) => {
 
     var eFrom
     try {
-        eFrom = info.evolution.M.evolvesFrom.S.charAt(0).toUpperCase() + info.evolution.M.evolvesFrom.S.slice(1)
+        const eFromName = info.evolution.M.evolvesFrom.M.name.S.charAt(0).toUpperCase() + info.evolution.M.evolvesFrom.M.name.S.slice(1)
+        const eFromID = info.evolution.M.evolvesFrom.M.id.N
+        eFrom = <Link href={`/${eFromID}`}>{eFromName}</Link>
     } catch {
         console.log("base evolution")
     }
-    const eToList = info.evolution.M.evolvesTo.L
     var eTo
     try {
-        eTo = eToList.map((info) => (info.S.charAt(0).toUpperCase() + info.S.slice(1))).join(", ")
+        eTo = info.evolution.M.evolvesTo.L.map((info) => {
+            const eToName = info.M.name.S.charAt(0).toUpperCase() + info.M.name.S.slice(1)
+            const eToID = info.M.id.N
+            return (
+                <div key={`eTo${eToID}`}>
+                    <Link href={`/${eToID}`}>{eToName}</Link>
+                    <br></br>
+                </div>
+            )
+        })
     } catch {
         console.log("final evolution")
     }

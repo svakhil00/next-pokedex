@@ -26,6 +26,31 @@ export async function testQuery() {
     }
 }
 
+export async function searchByName(name) {
+    const client = new DynamoDBClient({ region: 'us-east-2' });
+    const input = { // QueryInput
+        TableName: "pokemon", // required
+        Limit: Number("int"),
+        FilterExpression: "#pokemon_name = :n",
+        ExpressionAttributeNames: {
+            "#pokemon_name": "name"
+        },
+        ExpressionAttributeValues: {
+            ":n": {
+                "S": name
+            }
+        }
+    };
+
+    const command = new ScanCommand(input);
+    try {
+        const results = await client.send(command);
+        return results;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 export async function getAllPokemon() {
     const client = new DynamoDBClient({ region: 'us-east-2' });
     const input = { // QueryInput
