@@ -21,6 +21,10 @@ export default async function Home() {
   const pokemonList = (await getAllPokemon()).Items
   //const test = (await testQuery());
   //console.log(test)
+  pokemonList.sort((a, b) => (parseInt(a.id.N) > parseInt(b.id.N)) ? 1 : -1)
+  pokemonList.forEach((info) => {
+    console.log(info.id)
+  })
   const pokemon = pokemonList.map((info) => {
     return (
       < div class="pokemon" className="border-spacing-10" key={info.name.S} id={info.name.S} >
