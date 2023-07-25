@@ -13,6 +13,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from '../../components/ui/select'
+import Header from './header';
 
 const Info = (props) => {
     const info = props.info
@@ -64,7 +65,6 @@ const Info = (props) => {
             <Badge key={info.S}>{info.S}</Badge>
         )
     }))
-    console.log(imageSrc)
     const handleChange = (val) => {
         setSrc(getPicture(info, val))
         setTypes(info.varieties.L[val].M.types.L.map((info) => {
@@ -75,57 +75,60 @@ const Info = (props) => {
         setAbilities(info.varieties.L[val].M.abilities.L.map((ability) => ability.S).join(", "))
     }
     return (
-        <div className="bg-slate-950 h-screen w-screen flex flex-row">
-            <div id="test" className="w-[60%] flex items-center justify-center">
-                <div>
-                    <Image id="image" key="image" className="bg-slate-950" src={imageSrc} width={500} height={500} alt="Image Not Found"></Image>
-                </div>
-            </div>
-            <div className="flex-col w-[40%]">
-                <div className="h-[10%]">
-                    <h1 className="text-4xl font-bold text-center text-white">{number}    {name}</h1>
-                    <div className="flex flex-row justify-center items-center space-x-2">
-                        <Select id="variationSelection" onValueChange={handleChange} className="bg-slate-200">
-                            <SelectTrigger className="w-[180px] bg-white">
-                                <SelectValue placeholder="Variation" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                {variations}
-                            </SelectContent>
-                        </Select>
-
+        <div className="h-screen w-screen">
+            <Header />
+            <div className="bg-slate-950 flex flex-row h-[90%]">
+                <div id="test" className="w-[60%] flex items-center justify-center">
+                    <div>
+                        <Image id="image" key="image" className="bg-slate-950" src={imageSrc} width={500} height={500} alt="Image Not Found"></Image>
                     </div>
                 </div>
-                <div className="flex justify-center items-center h-[80%]">
-                    <div className="rounded-md m-8 bg-slate-700">
-                        <div className="flex flex-row justify-left m-4 space-x-2">
-                            <p className="text-l font-bold text-white">Genus:</p>
-                            <p className="text-white">{genus}</p>
-                        </div>
-                        <div className="flex flex-row justify-left m-4 space-x-2">
-                        </div>
-                        <div className="flex flex-wrap justify-left m-4 space-x-2">
-                            <p className="text-l font-bold text-white">Types:</p>
-                            {types}
-                        </div>
-                        <div className="flex flex-wrap justify-left m-4 space-x-2">
-                            <p className="text-l font-bold text-white">Abilities:</p>
-                            <p className="text-white">{abilities}</p>
-                        </div>
-                        <div className="flex flex-wrap justify-left m-4 space-x-2">
-                            <p className="text-l font-bold text-white">Evolves From:</p>
-                            <p className="text-white">{eFrom}</p>
-                        </div>
-                        <div className="flex flex-wrap justify-left m-4 space-x-2">
-                            <p className="text-l font-bold text-white">Evolves To:</p>
-                            <p className="text-white">{eTo}</p>
+                <div className="flex-col w-[40%]">
+                    <div className="h-[10%]">
+                        <h1 className="text-4xl font-bold text-center text-white">{number}    {name}</h1>
+                        <div className="flex flex-row justify-center items-center space-x-2">
+                            <Select id="variationSelection" onValueChange={handleChange} className="bg-slate-200">
+                                <SelectTrigger className="w-[180px] bg-white">
+                                    <SelectValue placeholder="Variation" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {variations}
+                                </SelectContent>
+                            </Select>
+
                         </div>
                     </div>
+                    <div className="flex justify-center items-center h-[80%]">
+                        <div className="rounded-md m-8 bg-slate-700">
+                            <div className="flex flex-row justify-left m-4 space-x-2">
+                                <p className="text-l font-bold text-white">Genus:</p>
+                                <p className="text-white">{genus}</p>
+                            </div>
+                            <div className="flex flex-row justify-left m-4 space-x-2">
+                            </div>
+                            <div className="flex flex-wrap justify-left m-4 space-x-2">
+                                <p className="text-l font-bold text-white">Types:</p>
+                                {types}
+                            </div>
+                            <div className="flex flex-wrap justify-left m-4 space-x-2">
+                                <p className="text-l font-bold text-white">Abilities:</p>
+                                <p className="text-white">{abilities}</p>
+                            </div>
+                            <div className="flex flex-wrap justify-left m-4 space-x-2">
+                                <p className="text-l font-bold text-white">Evolves From:</p>
+                                <p className="text-white">{eFrom}</p>
+                            </div>
+                            <div className="flex flex-wrap justify-left m-4 space-x-2">
+                                <p className="text-l font-bold text-white">Evolves To:</p>
+                                <p className="text-white">{eTo}</p>
+                            </div>
+                        </div>
 
 
-                </div>
-                <div className="text-white flex justify-center items-center">
-                    {links}
+                    </div>
+                    <div className="text-white flex justify-center items-center">
+                        {links}
+                    </div>
                 </div>
             </div>
         </div>

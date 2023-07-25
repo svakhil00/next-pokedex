@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { getColor, getPokemon, getPicture, getAllPokemon, testQuery } from './helpers';
 import { Label } from '../components/ui/label';
 import { ScrollArea } from '../components/ui/scroll-area';
+import Header from '../components/ui/header';
 import { Input } from '../components/ui/input';
 import { makeCard } from './helpers';
 import {
@@ -32,7 +33,7 @@ export default async function Home() {
 
   return (
     <div className="h-screen">
-      <h1 className="text-6xl font-bold text-center bg-red-600 text-white h-[10%]">Pokedex</h1>
+      <Header />
       <div className='bg-slate-950 h-[90%]'>
         <div className="h-[10%] p-2 flex justify-center items-center">
           <Input className="w-[500px]" id="searchbar"></Input>
