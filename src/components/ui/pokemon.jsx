@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import * as React from "react"
 import { getPicture } from '../../app/helpers';
+import { getColor } from '../../app/helpers';
 import { Badge } from './badge';
 import {
     Select,
@@ -24,8 +25,9 @@ const Info = (props) => {
     const genus = info.genus.S
 
     const variations = info.varieties.L.map((info, index) => {
+        const name = info.M.name.S.charAt(0).toUpperCase() + info.M.name.S.slice(1)
         return (
-            <SelectItem key={index} value={index}>{info.M.name.S}</SelectItem>
+            <SelectItem key={index} value={index}>{name}</SelectItem>
         )
     })
     const links = (
@@ -62,14 +64,14 @@ const Info = (props) => {
     const [abilities, setAbilities] = React.useState(info.varieties.L[0].M.abilities.L.map((ability) => ability.S).join(", "))
     const [types, setTypes] = React.useState(info.varieties.L[0].M.types.L.map((info) => {
         return (
-            <Badge key={info.S}>{info.S}</Badge>
+            <Badge className={`bg-${getColor(info.S)}-200 text-black`} key={info.S}>{info.S}</Badge>
         )
     }))
     const handleChange = (val) => {
         setSrc(getPicture(info, val))
         setTypes(info.varieties.L[val].M.types.L.map((info) => {
             return (
-                <Badge key={info.S}>{info.S}</Badge>
+                <Badge className={`bg-${getColor(info.S)}-200 text-black`} key={info.S}>{info.S}</Badge>
             )
         }))
         setAbilities(info.varieties.L[val].M.abilities.L.map((ability) => ability.S).join(", "))
