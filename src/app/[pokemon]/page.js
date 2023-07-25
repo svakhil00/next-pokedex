@@ -1,39 +1,23 @@
 import Link from 'next/link'
-import Image from 'next/image';
+import Image from 'next/image'
+import { getPokemon, searchByName } from '../helpers'
+import { getPicture } from '../helpers'
+import { Badge } from '../../components/ui/badge'
+import Info, { info } from '../../components/ui/pokemon'
+
+
+
+
 export default async function Pokemon({ params }) {
-    console.log(params);
-
-    const pokemon = await getPokemon(params.pokemon)
-
-    const prev = await getPokemon(pokemon.id - 1)
-    const next = await getPokemon(pokemon.id + 1)
-    console.log(prev)
-    console.log(next)
-    const types = pokemon.types.map((typesJSON) => {
-        return (
-            typesJSON.type.name
-        )
-    }
-    )
-
+    const pokemon = (await getPokemon(params.pokemon)).Item
+    const currid = parseInt(pokemon.id.N)
+    const previd = currid == 1 ? 1010 : currid - 1;
+    const nextid = currid == 1010 ? 1 : currid + 1;
+    const [prev, next] = await Promise.all([getPokemon(previd), getPokemon(nextid)]);
 
     return (
-        <div>
-            <Link href="/">Home</Link>
-            <Image src={pokemon.sprites.other["official-artwork"].front_default} width={250} height={250} alt={params.pokemon} />
-            <h1>Name: {pokemon.name}</h1>
-            <h1>Number: {pokemon.id}</h1>
-            {/* <h2>Category: {p.Category}</h2> */}
-            <h2>Type: {types.join(", ")}</h2>
-            {/* <h2>Weakness: {pokemonJSON.types.join(", ")}</h2> */}
-            <Link href={`/${prev.name}`}>Previous</Link>
-            <Link href={`/${next.name}`}>Next</Link>
+        <div className="bg-slate-950 h-screen w-screen">
+            <Info info={pokemon} prev={prev} next={next} />
         </div>
     )
-}
-
-async function getPokemon(name) {
-    const fetchedRequest = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
-    const pokemonJSON = await fetchedRequest.json()
-    return pokemonJSON
 }
