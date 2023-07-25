@@ -1,6 +1,85 @@
+"use client"
+import * as React from "react"
 import { Checkbox } from "./checkbox";
 
 const Filtering = () => {
+    const [normalState, setNormalState] = React.useState(false)
+    const [fireState, setFireState] = React.useState(false)
+    const [waterState, setWaterState] = React.useState(false)
+    const [grassState, setGrassState] = React.useState(false)
+    const [electricState, setElectricState] = React.useState(false)
+    const [iceState, setIceState] = React.useState(false)
+    const [fightingState, setFightingState] = React.useState(false)
+    const [poisonState, setPoisonState] = React.useState(false)
+    const [groundState, setGroundState] = React.useState(false)
+    const [flyingState, setFlyingState] = React.useState(false)
+    const [psychicState, setPsychicState] = React.useState(false)
+    const [bugState, setBugState] = React.useState(false)
+    const [rockState, setRockState] = React.useState(false)
+    const [ghostState, setGhostState] = React.useState(false)
+    const [darkState, setDarkState] = React.useState(false)
+    const [dragonState, setDragonState] = React.useState(false)
+    const [steelState, setSteelState] = React.useState(false)
+    const [fairyState, setFairyState] = React.useState(false)
+
+    const normal = (checked) => {
+        setNormalState(checked)
+        if (checked) {
+
+        }
+        console.log(checked)
+    }
+    // const normal = (checked) => {
+    //     console.log(checked)
+    // }
+    // const normal = (checked) => {
+    //     console.log(checked)
+    // }
+    // const normal = (checked) => {
+    //     console.log(checked)
+    // }
+    // const normal = (checked) => {
+    //     console.log(checked)
+    // }
+    // const normal = (checked) => {
+    //     console.log(checked)
+    // }
+    // const normal = (checked) => {
+    //     console.log(checked)
+    // }
+    // const normal = (checked) => {
+    //     console.log(checked)
+    // }
+    // const normal = (checked) => {
+    //     console.log(checked)
+    // }
+    // const normal = (checked) => {
+    //     console.log(checked)
+    // }
+    // const normal = (checked) => {
+    //     console.log(checked)
+    // }
+    // const normal = (checked) => {
+    //     console.log(checked)
+    // }
+    // const normal = (checked) => {
+    //     console.log(checked)
+    // }
+    // const normal = (checked) => {
+    //     console.log(checked)
+    // }
+    // const normal = (checked) => {
+    //     console.log(checked)
+    // }
+    // const normal = (checked) => {
+    //     console.log(checked)
+    // }
+    // const normal = (checked) => {
+    //     console.log(checked)
+    // }
+    // const normal = (checked) => {
+    //     console.log(checked)
+    // }
 
     return (
         <div className="grid grid-cols-2 items-center content-center space-x-2">
@@ -8,7 +87,7 @@ const Filtering = () => {
             <h1 className="text-m text-white">Type</h1>
             <p></p>
             <p></p>
-            <Checkbox className="bg-neutral-200" id="normal" />
+            <Checkbox onCheckedChange={normal} className="bg-neutral-200" id="normal" />
             <label
                 htmlFor="normal"
                 className="text-sm text-white font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
@@ -119,5 +198,7 @@ const Filtering = () => {
         </div>
     )
 }
+
+
 
 export default Filtering;

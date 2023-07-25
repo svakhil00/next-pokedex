@@ -137,3 +137,7 @@ export function getColor(type) {
     }
     return typeConversion[type]
 }
+
+export function filter(text) {
+    console.log(text)
+}
