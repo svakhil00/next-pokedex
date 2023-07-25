@@ -19,8 +19,6 @@ import { Button } from '../components/ui/button';
 
 export default async function Home() {
   const pokemonList = (await getAllPokemon()).Items
-  //const test = (await testQuery());
-  //console.log(test)
   pokemonList.sort((a, b) => (parseInt(a.id.N) > parseInt(b.id.N)) ? 1 : -1)
   const pokemon = pokemonList.map((info) => {
     //const types = info.varieties.L[0].M.types.L.map((type) => type.S).join("")
@@ -36,7 +34,7 @@ export default async function Home() {
 
 
   return (
-    <div className="h-screen">
+    <div className="h-screen w-screen">
       <Header />
       <div className='bg-slate-950 h-[90%]'>
         <div className="h-[10%] p-2 flex justify-center items-center">

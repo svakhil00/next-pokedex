@@ -5,7 +5,21 @@ import { cn } from "@/lib/utils"
 
 const Input = React.forwardRef(({ className, type, ...props }, ref) => {
   const handleInput = () => {
-    filter()
+    const value = document.getElementById("searchbar").value.toLowerCase()
+    const allPokemon = document.getElementsByClassName("pokemon");
+    var pokemon = document.querySelectorAll('div[id*="' + value + '"]');
+
+    var displayVal = "none"
+
+    if (value === "") {
+      displayVal = ""
+    }
+    for (let i = 0; i < allPokemon.length; i++) {
+      allPokemon.item(i).style.display = displayVal
+    }
+    for (let i = 0; i < pokemon.length; i++) {
+      pokemon.item(i).style.display = ""
+    }
   }
   return (
     (<input
@@ -20,23 +34,5 @@ const Input = React.forwardRef(({ className, type, ...props }, ref) => {
   );
 })
 Input.displayName = "Input"
-
-function filter(searchText) {
-  const value = document.getElementById("searchbar").value.toLowerCase()
-  const allPokemon = document.getElementsByClassName("pokemon");
-  var pokemon = document.querySelectorAll('div[id*="' + value + '"]');
-
-  var displayVal = "none"
-
-  if (value === "") {
-    displayVal = ""
-  }
-  for (let i = 0; i < allPokemon.length; i++) {
-    allPokemon.item(i).style.display = displayVal
-  }
-  for (let i = 0; i < pokemon.length; i++) {
-    pokemon.item(i).style.display = ""
-  }
-}
 
 export { Input }
