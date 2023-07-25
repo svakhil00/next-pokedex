@@ -3,6 +3,7 @@ import { getColor, getPokemon, getPicture, getAllPokemon, testQuery } from './he
 import { Label } from '../components/ui/label';
 import { ScrollArea } from '../components/ui/scroll-area';
 import Header from '../components/ui/header';
+import Filtering from '../components/ui/filtering';
 import { Input } from '../components/ui/input';
 import { makeCard } from './helpers';
 import {
@@ -39,11 +40,13 @@ export default async function Home() {
           <Input className="w-[500px]" id="searchbar"></Input>
         </div>
         <div className="flex flex-row h-[90%]">
-          <div className="w-[20%]">
-            <Button>Click Me!</Button>
+          <div className="w-[10%]">
+            <ScrollArea className="h-full">
+              <Filtering />
+            </ScrollArea>
           </div>
-          <ScrollArea id="scrollArea" className="rounded-md h-full h-[90%]">
-            <div id="pokemonList" className="flex flex-wrap bg-slate-950 gap-6 justify-center">
+          <ScrollArea id="scrollArea" className="rounded-md h-full w-[90%]">
+            <div id="pokemonList" className="flex flex-wrap bg-slate-950 gap-10 justify-center">
               {pokemon}
             </div>
           </ScrollArea>

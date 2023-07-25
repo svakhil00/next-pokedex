@@ -93,9 +93,9 @@ export function makeCard(info) {
     const name = info.name.S.charAt(0).toUpperCase() + info.name.S.slice(1)
     const number = "#" + info.id.N.padStart(4, '0')
     const color = getColor(type)
-    //set slate to $(color)
+    //set slate to ${color}
     return (
-        <Card className={`w-[250px] bg-slate-200 border-${color}-950`}>
+        <Card className={`w-[250px] bg-${color}-200 border-${color}-950`}>
             <CardContent>
                 <div className="grid w-full items-center gap-4">
                     <div>
@@ -129,7 +129,7 @@ export function getColor(type) {
         psychic: "pink",
         bug: "lime",
         rock: "stone",
-        ghosts: "slate",
+        ghost: "slate",
         dark: "zinc",
         dragon: "indigo",
         steel: "gray",
